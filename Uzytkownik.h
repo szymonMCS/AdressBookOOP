@@ -1,3 +1,6 @@
+#ifndef UZYTKOWNIK_H
+#define UZYTKOWNIK_H
+
 #include <iostream>
 
 class Uzytkownik{
@@ -7,6 +10,7 @@ class Uzytkownik{
     std::string haslo;
 
     public:
+
     void ustawId(int input);
     void ustawLogin(std::string input);
     void ustawHaslo(std::string input);
@@ -17,3 +21,5 @@ class Uzytkownik{
 
 
 };
+
+#endif // UZYTKOWNIK_H
