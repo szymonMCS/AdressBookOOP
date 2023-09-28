@@ -14,7 +14,6 @@
 class UzytkownikMenadzer{
 
     int idZalogowanegoUzytkownika;
-
     std::vector <Uzytkownik> uzytkownicy;
 
     Uzytkownik podajDaneNowegoUzytkownika();
@@ -22,10 +21,13 @@ class UzytkownikMenadzer{
     bool czyIstniejeLogin(std::string login);
     PlikZUzytkownikami plikZUzytkownikami;
 
+
 public:
 
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
+    void wczytajUzytkownikowZPliku();
+    Uzytkownik pobierzDaneUzytkownika(std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
 };
 
 #endif // UZYTKOWNIKMENADZER_H
