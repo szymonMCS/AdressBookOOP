@@ -11,15 +11,16 @@
 
 class PlikZUzytkownikami{
 
-    std::string nazwaPlikuZUzytkownikami;
-    std::fstream plikTekstowy;
+    const std::string nazwaPlikuZUzytkownikami;
+    std::string liniaZDanymiUzytkownika;
 
     bool czyPlikJestPusty();
     std::string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
     Uzytkownik pobierzDaneUzytkownika(std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
 
 public:
-    PlikZUzytkownikami();
+
+    PlikZUzytkownikami(std::string NAZWAPLIKUZUZYTKOWNIKAMI) : nazwaPlikuZUzytkownikami(NAZWAPLIKUZUZYTKOWNIKAMI) {};
     void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
     std::vector <Uzytkownik>  wczytajUzytkownikowZPliku();
 };

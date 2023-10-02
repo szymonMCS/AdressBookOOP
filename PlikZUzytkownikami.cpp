@@ -1,12 +1,9 @@
 #include "PlikZUzytkownikami.h"
 
-PlikZUzytkownikami::PlikZUzytkownikami(){
-    nazwaPlikuZUzytkownikami = "Uzytkownicy.txt";
-}
-
 void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik){
 
     std::string liniaZDanymiUzytkownika = "";
+    std::fstream plikTekstowy;
     plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), std::ios::app);
 
     if (plikTekstowy.good() == true)
@@ -29,6 +26,8 @@ void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik){
 
 bool PlikZUzytkownikami::czyPlikJestPusty(){
 
+    std::fstream plikTekstowy;
+
     plikTekstowy.seekg(0, std::ios::end);
     if (plikTekstowy.tellg() == 0)
         return true;
@@ -39,6 +38,7 @@ bool PlikZUzytkownikami::czyPlikJestPusty(){
 std::string PlikZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik){
 
     std::string liniaZDanymiUzytkownika = "";
+
     liniaZDanymiUzytkownika += MetodyPomocnicze::konwerjsaIntNaString(uzytkownik.pobierzId())+ '|';
     liniaZDanymiUzytkownika += uzytkownik.pobierzLogin() + '|';
     liniaZDanymiUzytkownika += uzytkownik.pobierzHaslo() + '|';
@@ -51,6 +51,7 @@ std::vector <Uzytkownik> PlikZUzytkownikami::wczytajUzytkownikowZPliku(){
     Uzytkownik uzytkownik;
     std::vector <Uzytkownik> uzytkownicy;
     std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
+    std::fstream plikTekstowy;
 
     plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), std::ios::in);
 
