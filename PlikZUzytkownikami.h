@@ -23,6 +23,7 @@ public:
     PlikZUzytkownikami(std::string NAZWAPLIKUZUZYTKOWNIKAMI) : nazwaPlikuZUzytkownikami(NAZWAPLIKUZUZYTKOWNIKAMI) {};
     void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
     std::vector <Uzytkownik>  wczytajUzytkownikowZPliku();
+    void zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkownik>& uzytkownicy);
 };
 
 #endif // PLIKZUZYTKOWNIKAMI_H
