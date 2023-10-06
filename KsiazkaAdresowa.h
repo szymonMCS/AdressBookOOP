@@ -9,6 +9,7 @@
 class KsiazkaAdresowa {
 
     UzytkownikMenadzer uzytkownikMenadzer;
+    //AdresatMenadzer adresatMenadzer;
 
 public:
 
@@ -17,6 +18,9 @@ public:
     };
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
+    int logowanieUzytkownika();
+
+    void dodajAdresata();
 
 };
 

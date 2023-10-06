@@ -26,9 +26,16 @@ public:
 
     UzytkownikMenadzer(std::string nazwaPlikuZUzytkownikami) : plikZUzytkownikami(nazwaPlikuZUzytkownikami) {};
     void rejestracjaUzytkownika();
+    int logowanieUzytkownika();
     void wypiszWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
     Uzytkownik pobierzDaneUzytkownika(std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
+    void zmianaHaslaZalogowanegoUzytkownika();
+    void wylogujUzytkownika();
+
+    void ustawIdZalogowanegoUzytkownika(int idZalogowanego);
+    int pobierzIdZalogowanegoUzytkownika();
+
 };
 
 #endif // UZYTKOWNIKMENADZER_H
