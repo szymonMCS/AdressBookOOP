@@ -11,15 +11,14 @@ class Uzytkownik{
 
     public:
 
+    //SETTERY
     void ustawId(int input);
     void ustawLogin(std::string input);
     void ustawHaslo(std::string input);
-
+    //GETTERY
     int pobierzId();
     std::string pobierzLogin();
     std::string pobierzHaslo();
-
-
 };
 
 #endif // UZYTKOWNIK_H
