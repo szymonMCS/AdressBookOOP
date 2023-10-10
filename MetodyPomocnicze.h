@@ -5,12 +5,15 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 class MetodyPomocnicze{
 
     public:
-    static std::string konwerjsaIntNaString(int liczba);
+    static std::string konwersjaIntNaString(int liczba);
+    static int konwersjaStringNaInt(std::string liczba);
     static std::string wczytajLinie();
+    static std::string zamienPierwszaLitereNaDuzaAPozostaleNaMale(std::string tekst);
 };
 
 #endif // METODYPOMOCNICZE_H

@@ -12,7 +12,6 @@
 class PlikZUzytkownikami{
 
     const std::string nazwaPlikuZUzytkownikami;
-    std::string liniaZDanymiUzytkownika;
 
     bool czyPlikJestPusty();
     std::string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
@@ -21,6 +20,7 @@ class PlikZUzytkownikami{
 public:
 
     PlikZUzytkownikami(std::string NAZWAPLIKUZUZYTKOWNIKAMI) : nazwaPlikuZUzytkownikami(NAZWAPLIKUZUZYTKOWNIKAMI) {};
+    //METODY
     void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
     std::vector <Uzytkownik>  wczytajUzytkownikowZPliku();
     void zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkownik>& uzytkownicy);

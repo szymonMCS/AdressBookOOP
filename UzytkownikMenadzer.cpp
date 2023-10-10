@@ -115,10 +115,10 @@ void UzytkownikMenadzer::zmianaHaslaZalogowanegoUzytkownika()
     plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
 }
 
-void UzytkownikMenadzer::wylogujUzytkownika()
+void UzytkownikMenadzer::wylogujUzytkownika(std::vector<Adresat>& adresaci)
 {
     ustawIdZalogowanegoUzytkownika(0);
-    //adresaci.clear();
+    adresaci.clear();
 }
 
 void UzytkownikMenadzer::ustawIdZalogowanegoUzytkownika(int idZalogowanego){
