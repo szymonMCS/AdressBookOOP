@@ -16,11 +16,10 @@ public:
 
     KsiazkaAdresowa(std::string nazwaPlikuZUzytkownikami, std::string nazwaPlikuZAdresatami) : uzytkownikMenadzer(nazwaPlikuZUzytkownikami), adresatMenadzer(nazwaPlikuZAdresatami){
         uzytkownikMenadzer.wczytajUzytkownikowZPliku();
-        adresatMenadzer.pobierzAdresatowZalogowanegoUzytkownikaZPliku();
     };
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
-    int logowanieUzytkownika();
+    void logowanieUzytkownika();
     void dodajAdresata();
     void wyswietlWszystkichAdresatow();
     void wylogujUzytkownika();

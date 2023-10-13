@@ -1,5 +1,5 @@
-#ifndef PLIKZADRESATAMI.H
-#define PLIKZADRESATAMI.H
+#ifndef PLIKZADRESATAMI_H
+#define PLIKZADRESATAMI_H
 
 #include <iostream>
 #include <vector>
@@ -24,11 +24,14 @@ class PlikZAdresatami{
 public:
 
     //METODY
-    PlikZAdresatami(std::string NAZWAPLIKUZADRESATAMI) : nazwaPlikuZAdresatami(NAZWAPLIKUZADRESATAMI) {};
+    PlikZAdresatami(std::string NAZWAPLIKUZADRESATAMI) : nazwaPlikuZAdresatami(NAZWAPLIKUZADRESATAMI) {
+        idOstatniegoAdresata = 0;
+    };
     std::vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanego);
     void dopiszAdresataDoPliku(Adresat adresat);
     //GETTERY
     int pobierzIdOstatniegoAdresata();
+    void ustawIdOstatniegoAdresata(int input);
 
 };
 

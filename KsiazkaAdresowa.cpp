@@ -9,7 +9,7 @@ void KsiazkaAdresowa::dodajAdresata() {
     adresatMenadzer.dodajAdresata();
 }
 
-int KsiazkaAdresowa::logowanieUzytkownika(){
+void KsiazkaAdresowa::logowanieUzytkownika(){
 
     uzytkownikMenadzer.logowanieUzytkownika();
     adresatMenadzer.ustawIdZalogowanegoUzytkownika(uzytkownikMenadzer.pobierzIdZalogowanegoUzytkownika());
@@ -22,8 +22,9 @@ void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika(){
 }
 
 void KsiazkaAdresowa::wylogujUzytkownika() {
-    std::vector<Adresat>& wektorAdresatow = adresatMenadzer.pobierzWektorAdresatow();
-    uzytkownikMenadzer.wylogujUzytkownika(wektorAdresatow);
+
+    uzytkownikMenadzer.wylogujUzytkownika();
+    adresatMenadzer.wyczyscWektor();
 }
 
 

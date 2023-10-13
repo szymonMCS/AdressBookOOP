@@ -10,7 +10,6 @@
 #include "Uzytkownik.h"
 #include "MetodyPomocnicze.h"
 #include "PlikZUzytkownikami.h"
-#include "AdresatMenadzer.h"
 
 class UzytkownikMenadzer{
 
@@ -36,7 +35,7 @@ public:
     void wypiszWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
     void zmianaHaslaZalogowanegoUzytkownika();
-    void wylogujUzytkownika(std::vector<Adresat>& adresaci);
+    void wylogujUzytkownika();
 
 };
 

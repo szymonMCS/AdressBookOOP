@@ -1,5 +1,5 @@
-#ifndef ADRESATMENADZER.H
-#define ADRESATMENADZER.H
+#ifndef ADRESATMENADZER_H
+#define ADRESATMENADZER_H
 
 #include <vector>
 #include <windows.h>
@@ -10,6 +10,7 @@
 #include "Adresat.h"
 #include "PlikZAdresatami.h"
 #include "MetodyPomocnicze.h"
+#include "UzytkownikMenadzer.h"
 
 
 class AdresatMenadzer {
@@ -18,7 +19,6 @@ class AdresatMenadzer {
     int idZalogowanegoUzytkownika;
     std::vector <Adresat> adresaci;
     PlikZAdresatami plikZAdresatami;
-    std::vector<Adresat> wektorAdresatow;
 
 
     Adresat podajDaneNowegoAdresata();
@@ -26,17 +26,18 @@ class AdresatMenadzer {
 
 public:
 
-    AdresatMenadzer(std::string nazwaPlikuZAdresatami) : plikZAdresatami(nazwaPlikuZAdresatami) {};
+    AdresatMenadzer(std::string nazwaPlikuZAdresatami) : plikZAdresatami(nazwaPlikuZAdresatami) {
 
+    };
     //SETTERY
-    void ustawIdZalogowanegoUzytkownika(int idZalogowanego);
+    void ustawIdZalogowanegoUzytkownika(int id);
     //GETTERY
     int pobierzIdZalogowanegoUzytkownika();
     //METODY
     void pobierzAdresatowZalogowanegoUzytkownikaZPliku();
-    int dodajAdresata();
+    void dodajAdresata();
     void wyswietlWszystkichAdresatow();
-    std::vector<Adresat>& pobierzWektorAdresatow();
+    void wyczyscWektor();
 
 };
 
