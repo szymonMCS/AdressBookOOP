@@ -1,5 +1,5 @@
-#ifndef ADRESAT.H
-#define ADRESAT.H
+#ifndef ADRESAT_H
+#define ADRESAT_H
 
 #include <iostream>
 

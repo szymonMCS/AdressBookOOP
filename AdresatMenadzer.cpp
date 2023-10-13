@@ -1,8 +1,8 @@
 #include "AdresatMenadzer.h"
 
-void AdresatMenadzer::ustawIdZalogowanegoUzytkownika(int idZalogowanego){
+void AdresatMenadzer::ustawIdZalogowanegoUzytkownika(int id){
 
-    idZalogowanegoUzytkownika = idZalogowanego;
+    idZalogowanegoUzytkownika = id;
 }
 int AdresatMenadzer::pobierzIdZalogowanegoUzytkownika(){
 
@@ -12,28 +12,26 @@ int AdresatMenadzer::pobierzIdZalogowanegoUzytkownika(){
 void AdresatMenadzer::pobierzAdresatowZalogowanegoUzytkownikaZPliku(){
 
     adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(pobierzIdZalogowanegoUzytkownika());
-
 }
 
-int AdresatMenadzer::dodajAdresata()
+void AdresatMenadzer::dodajAdresata()
 {
     Adresat adresat;
 
     system("cls");
-    std::cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << std::endl << std::endl;
+    std::cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << std::endl;
     adresat = podajDaneNowegoAdresata();
 
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
-
-    return plikZAdresatami.pobierzIdOstatniegoAdresata() + 1;
+    plikZAdresatami.ustawIdOstatniegoAdresata(adresat.pobierzId());
 }
 
 Adresat AdresatMenadzer::podajDaneNowegoAdresata()
 {
     Adresat adresat;
 
-    adresat.ustawId(plikZAdresatami.pobierzIdOstatniegoAdresata());
+    adresat.ustawId(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);
     adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
 
     std::cout << "Podaj imie: ";
@@ -64,7 +62,7 @@ void AdresatMenadzer::wyswietlWszystkichAdresatow()
     {
         std::cout << "                 >>> ADRESACI <<<"               << std::endl;
         std::cout << "-----------------------------------------------" << std::endl;
-        for (int i = 0; i < adresaci.size(); i++){
+        for (std::string::size_type i = 0; i < adresaci.size(); i++){
 
             wyswietlDaneAdresata(i);
         }
@@ -87,7 +85,7 @@ void AdresatMenadzer::wyswietlDaneAdresata(int input)
     std::cout <<              "Adres:              " << adresaci[input].pobierzAdres() << std::endl;
 }
 
-std::vector<Adresat>& AdresatMenadzer::pobierzWektorAdresatow() {
-    return wektorAdresatow;
+void AdresatMenadzer::wyczyscWektor() {
+    adresaci.clear();
 }
 

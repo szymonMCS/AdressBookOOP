@@ -39,7 +39,7 @@ int UzytkownikMenadzer::pobierzIdNowegoUzytkownika(){
 
 bool UzytkownikMenadzer::czyIstniejeLogin(std::string login){
 
-    for (int i = 0; i < uzytkownicy.size(); i++){
+    for (std::string::size_type i = 0; i < uzytkownicy.size(); i++){
         if (uzytkownicy[i].pobierzLogin() == login){
 
             std::cout << std::endl << "Istnieje uzytkownik o takim loginie." << std::endl;
@@ -51,7 +51,7 @@ bool UzytkownikMenadzer::czyIstniejeLogin(std::string login){
 
 void UzytkownikMenadzer::wypiszWszystkichUzytkownikow(){
 
-    for (int i = 0; i < uzytkownicy.size(); i++){
+    for (std::string::size_type i = 0; i < uzytkownicy.size(); i++){
 
             std::cout << uzytkownicy[i].pobierzId() << std::endl;
             std::cout << uzytkownicy[i].pobierzLogin() << std::endl;
@@ -73,7 +73,7 @@ int UzytkownikMenadzer::logowanieUzytkownika()
     std::cout << std::endl << "Podaj login: ";
     login = MetodyPomocnicze::wczytajLinie();
 
-    for (int i = 0; i < uzytkownicy.size(); i++){
+    for (std::string::size_type i = 0; i < uzytkownicy.size(); i++){
         if (uzytkownicy[i].pobierzLogin() == login){
             for (int iloscProb = 3; iloscProb > 0; iloscProb--)
             {
@@ -104,7 +104,7 @@ void UzytkownikMenadzer::zmianaHaslaZalogowanegoUzytkownika()
     std::cout << "Podaj nowe haslo: ";
     noweHaslo = MetodyPomocnicze::wczytajLinie();
 
-    for (int i = 0; i < uzytkownicy.size(); i++){
+    for (std::string::size_type i = 0; i < uzytkownicy.size(); i++){
 
         if (uzytkownicy[i].pobierzId() == pobierzIdZalogowanegoUzytkownika()){
             uzytkownicy[i].ustawHaslo(noweHaslo);
@@ -115,10 +115,9 @@ void UzytkownikMenadzer::zmianaHaslaZalogowanegoUzytkownika()
     plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
 }
 
-void UzytkownikMenadzer::wylogujUzytkownika(std::vector<Adresat>& adresaci)
+void UzytkownikMenadzer::wylogujUzytkownika()
 {
     ustawIdZalogowanegoUzytkownika(0);
-    adresaci.clear();
 }
 
 void UzytkownikMenadzer::ustawIdZalogowanegoUzytkownika(int idZalogowanego){
