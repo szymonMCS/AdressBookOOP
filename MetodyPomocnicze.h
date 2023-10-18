@@ -14,6 +14,7 @@ public:
     static int konwersjaStringNaInt(std::string liczba);
     static std::string wczytajLinie();
     static std::string zamienPierwszaLitereNaDuzaAPozostaleNaMale(std::string tekst);
+    static char wczytajZnak();
 };
 
 #endif // METODYPOMOCNICZE_H
