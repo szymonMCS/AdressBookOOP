@@ -30,6 +30,10 @@ public:
     void wyswietlWszystkichAdresatow();
     void wylogujUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
+    bool czyUzytkownikJestZalogowany();
+    char wybierzOpcjeZMenuGlownego();
+    char wybierzOpcjeZMenuUzytkownika();
+    void menu();
 };
 
 #endif // KSIAZKAADRESOWA_H

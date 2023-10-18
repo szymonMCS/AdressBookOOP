@@ -29,3 +29,22 @@ std::string MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(std::st
     }
     return tekst;
 }
+
+
+char MetodyPomocnicze::wczytajZnak(){
+    std::string wejscie = "";
+    char znak  = {0};
+
+    while (true)
+    {
+        getline(std::cin, wejscie);
+
+        if (wejscie.length() == 1)
+        {
+            znak = wejscie[0];
+            break;
+        }
+        std::cout << "To nie jest pojedynczy znak. Wpisz ponownie." << std::endl;
+    }
+    return znak;
+}
