@@ -10,8 +10,7 @@
 #include "MetodyPomocnicze.h"
 
 class PlikZUzytkownikami{
-
-    const std::string nazwaPlikuZUzytkownikami;
+    const std::string NAZWA_PLIKU_Z_UZYTKOWNIKAMI;
 
     bool czyPlikJestPusty();
     std::string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
@@ -19,7 +18,7 @@ class PlikZUzytkownikami{
 
 public:
 
-    PlikZUzytkownikami(std::string NAZWAPLIKUZUZYTKOWNIKAMI) : nazwaPlikuZUzytkownikami(NAZWAPLIKUZUZYTKOWNIKAMI) {};
+    PlikZUzytkownikami(std::string nazwaPlikuZUzytkownikami) : NAZWA_PLIKU_Z_UZYTKOWNIKAMI(nazwaPlikuZUzytkownikami) {};
     //METODY
     void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
     std::vector <Uzytkownik>  wczytajUzytkownikowZPliku();

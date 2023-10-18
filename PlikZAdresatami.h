@@ -10,11 +10,10 @@
 #include "MetodyPomocnicze.h"
 
 class PlikZAdresatami{
-
-    const std::string nazwaPlikuZAdresatami;
+    const std::string NAZWA_PLIKU_Z_ADRESATAMI;
     int idOstatniegoAdresata;
 
-    bool czyPlikJestPusty();
+    bool czyPlikJestPusty(std::fstream &plikTekstowy);
     int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami);
     int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami);
     Adresat pobierzDaneAdresata(std::string daneAdresataOddzielonePionowymiKreskami);
@@ -22,17 +21,14 @@ class PlikZAdresatami{
     std::string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
 
 public:
-
     //METODY
-    PlikZAdresatami(std::string NAZWAPLIKUZADRESATAMI) : nazwaPlikuZAdresatami(NAZWAPLIKUZADRESATAMI) {
+    PlikZAdresatami(std::string nazwaPlikuZAdresatami) : NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami) {
         idOstatniegoAdresata = 0;
     };
     std::vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanego);
-    void dopiszAdresataDoPliku(Adresat adresat);
+    bool dopiszAdresataDoPliku(Adresat adresat);
     //GETTERY
     int pobierzIdOstatniegoAdresata();
-    void ustawIdOstatniegoAdresata(int input);
-
 };
 
 #endif // PLIKZADRESATAMI

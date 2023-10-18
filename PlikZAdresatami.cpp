@@ -4,18 +4,13 @@ int PlikZAdresatami::pobierzIdOstatniegoAdresata(){
         return idOstatniegoAdresata;
 }
 
-void PlikZAdresatami::ustawIdOstatniegoAdresata(int id){
-        idOstatniegoAdresata = id;
-}
-
-std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika)
-{
+std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
     Adresat adresat;
     std::vector <Adresat> adresaci;
     std::string daneJednegoAdresataOddzielonePionowymiKreskami = "";
     std::string daneOstaniegoAdresataWPliku = "";
     std::fstream plikTekstowy;
-    plikTekstowy.open(nazwaPlikuZAdresatami.c_str(), std::ios::in);
+    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::in);
 
     if (plikTekstowy.good() == true)
     {
@@ -28,24 +23,21 @@ std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZP
             }
         }
         daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
+        plikTekstowy.close();
     }
     else
         std::cout << "Nie udalo sie otworzyc pliku i wczytac danych." << std::endl;
-
-    plikTekstowy.close();
+        plikTekstowy.close();
+        system("pause");
 
     if (daneOstaniegoAdresataWPliku != "")
     {
-        ustawIdOstatniegoAdresata(pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku));
-        return adresaci;
+        idOstatniegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
     }
-
     return adresaci;
 }
 
-bool PlikZAdresatami::czyPlikJestPusty(){
-
-    std::fstream plikTekstowy;
+bool PlikZAdresatami::czyPlikJestPusty(std::fstream &plikTekstowy){
 
     plikTekstowy.seekg(0, std::ios::end);
     if (plikTekstowy.tellg() == 0)
@@ -54,23 +46,20 @@ bool PlikZAdresatami::czyPlikJestPusty(){
         return false;
 }
 
-int PlikZAdresatami::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami)
-{
+int PlikZAdresatami::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami){
     int pozycjaRozpoczeciaIdUzytkownika = daneJednegoAdresataOddzielonePionowymiKreskami.find_first_of('|') + 1;
     int idUzytkownika = MetodyPomocnicze::konwersjaStringNaInt(pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdUzytkownika));
 
     return idUzytkownika;
 }
 
-int PlikZAdresatami::pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami)
-{
+int PlikZAdresatami::pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami){
     int pozycjaRozpoczeciaIdAdresata = 0;
     int idAdresata = MetodyPomocnicze::konwersjaStringNaInt(pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdAdresata));
     return idAdresata;
 }
 
-Adresat PlikZAdresatami::pobierzDaneAdresata(std::string daneAdresataOddzielonePionowymiKreskami)
-{
+Adresat PlikZAdresatami::pobierzDaneAdresata(std::string daneAdresataOddzielonePionowymiKreskami){
     Adresat adresat;
     std::string pojedynczaDanaAdresata = "";
     int numerPojedynczejDanejAdresata = 1;
@@ -114,8 +103,7 @@ Adresat PlikZAdresatami::pobierzDaneAdresata(std::string daneAdresataOddzieloneP
     return adresat;
 }
 
-std::string PlikZAdresatami::pobierzLiczbe(std::string tekst, int pozycjaZnaku)
-{
+std::string PlikZAdresatami::pobierzLiczbe(std::string tekst, int pozycjaZnaku){
     std::string liczba = "";
     while(isdigit(tekst[pozycjaZnaku]) == true)
     {
@@ -125,35 +113,36 @@ std::string PlikZAdresatami::pobierzLiczbe(std::string tekst, int pozycjaZnaku)
     return liczba;
 }
 
-void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat)
-{
+bool PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat){
     std::string liniaZDanymiAdresata = "";
     std::fstream plikTekstowy;
-    plikTekstowy.open(nazwaPlikuZAdresatami.c_str(), std::ios::out | std::ios::app);
+    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::out | std::ios::app);
 
     if (plikTekstowy.good() == true)
     {
         liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
 
-        if (czyPlikJestPusty() == true)
+        if (czyPlikJestPusty(plikTekstowy) == true)
         {
             plikTekstowy << liniaZDanymiAdresata;
         }
         else
         {
-            plikTekstowy << std::endl << liniaZDanymiAdresata ;
+            plikTekstowy << std::endl << liniaZDanymiAdresata;
         }
+        idOstatniegoAdresata++;
+        plikTekstowy.close();
+        return true;
     }
     else
     {
         std::cout << "Nie udalo sie otworzyc pliku i zapisac w nim danych." << std::endl;
+        plikTekstowy.close();
     }
-    plikTekstowy.close();
-    system("pause");
+    return false;
 }
 
-std::string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat)
-{
+std::string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat){
     std::string liniaZDanymiAdresata = "";
 
     liniaZDanymiAdresata += MetodyPomocnicze::konwersjaIntNaString(adresat.pobierzId()) + '|';

@@ -6,7 +6,6 @@
 #include <sstream>
 #include <fstream>
 
-
 #include "Adresat.h"
 #include "PlikZAdresatami.h"
 #include "MetodyPomocnicze.h"
@@ -14,31 +13,20 @@
 
 
 class AdresatMenadzer {
-
-
-    int idZalogowanegoUzytkownika;
+    const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
     std::vector <Adresat> adresaci;
     PlikZAdresatami plikZAdresatami;
-
 
     Adresat podajDaneNowegoAdresata();
     void wyswietlDaneAdresata(int input);
 
 public:
-
-    AdresatMenadzer(std::string nazwaPlikuZAdresatami) : plikZAdresatami(nazwaPlikuZAdresatami) {
-
+    AdresatMenadzer(std::string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
+     : plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika) {
+        adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
     };
-    //SETTERY
-    void ustawIdZalogowanegoUzytkownika(int id);
-    //GETTERY
-    int pobierzIdZalogowanegoUzytkownika();
-    //METODY
-    void pobierzAdresatowZalogowanegoUzytkownikaZPliku();
     void dodajAdresata();
     void wyswietlWszystkichAdresatow();
-    void wyczyscWektor();
-
 };
 
 #endif // ADRESATMENADZER

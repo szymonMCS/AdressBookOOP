@@ -9,7 +9,7 @@
 
 class MetodyPomocnicze{
 
-    public:
+public:
     static std::string konwersjaIntNaString(int liczba);
     static int konwersjaStringNaInt(std::string liczba);
     static std::string wczytajLinie();
