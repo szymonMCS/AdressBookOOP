@@ -1,7 +1,6 @@
 #include "UzytkownikMenadzer.h"
 
 void UzytkownikMenadzer::rejestracjaUzytkownika(){
-
     Uzytkownik uzytkownik = podajDaneNowegoUzytkownika();
 
     uzytkownicy.push_back(uzytkownik);
@@ -12,7 +11,6 @@ void UzytkownikMenadzer::rejestracjaUzytkownika(){
 }
 
 Uzytkownik UzytkownikMenadzer::podajDaneNowegoUzytkownika(){
-
     Uzytkownik uzytkownik;
 
     uzytkownik.ustawId(pobierzIdNowegoUzytkownika());
@@ -30,7 +28,6 @@ Uzytkownik UzytkownikMenadzer::podajDaneNowegoUzytkownika(){
 }
 
 int UzytkownikMenadzer::pobierzIdNowegoUzytkownika(){
-
     if (uzytkownicy.empty() == true)
         return 1;
     else
@@ -38,7 +35,6 @@ int UzytkownikMenadzer::pobierzIdNowegoUzytkownika(){
 }
 
 bool UzytkownikMenadzer::czyIstniejeLogin(std::string login){
-
     for (std::string::size_type i = 0; i < uzytkownicy.size(); i++){
         if (uzytkownicy[i].pobierzLogin() == login){
 
@@ -50,7 +46,6 @@ bool UzytkownikMenadzer::czyIstniejeLogin(std::string login){
 }
 
 void UzytkownikMenadzer::wypiszWszystkichUzytkownikow(){
-
     for (std::string::size_type i = 0; i < uzytkownicy.size(); i++){
 
             std::cout << uzytkownicy[i].pobierzId() << std::endl;
@@ -59,13 +54,7 @@ void UzytkownikMenadzer::wypiszWszystkichUzytkownikow(){
     }
 }
 
-void UzytkownikMenadzer::wczytajUzytkownikowZPliku(){
-
-    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
-}
-
-int UzytkownikMenadzer::logowanieUzytkownika()
-{
+void UzytkownikMenadzer::logowanieUzytkownika(){
     Uzytkownik uzytkownik;
     std::string login = "";
     std::string haslo = "";
@@ -84,22 +73,20 @@ int UzytkownikMenadzer::logowanieUzytkownika()
                 {
                     std::cout << std::endl << "Zalogowales sie." << std::endl << std::endl;
                     system("pause");
-                    ustawIdZalogowanegoUzytkownika(uzytkownicy[i].pobierzId());
-                    return pobierzIdZalogowanegoUzytkownika();
+                    idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
+                    return;
                 }
             }
             std::cout << "Wprowadzono 3 razy bledne haslo." << std::endl;
             system("pause");
-            return 0;
+            return;
         }
     }
     std::cout << "Nie ma uzytkownika z takim loginem" << std::endl << std::endl;
     system("pause");
-    return 0;
 }
 
-void UzytkownikMenadzer::zmianaHaslaZalogowanegoUzytkownika()
-{
+void UzytkownikMenadzer::zmianaHaslaZalogowanegoUzytkownika(){
     std::string noweHaslo = "";
     std::cout << "Podaj nowe haslo: ";
     noweHaslo = MetodyPomocnicze::wczytajLinie();
@@ -115,16 +102,18 @@ void UzytkownikMenadzer::zmianaHaslaZalogowanegoUzytkownika()
     plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
 }
 
-void UzytkownikMenadzer::wylogujUzytkownika()
-{
-    ustawIdZalogowanegoUzytkownika(0);
+void UzytkownikMenadzer::wylogujUzytkownika(){
+    idZalogowanegoUzytkownika = 0;
 }
-
-void UzytkownikMenadzer::ustawIdZalogowanegoUzytkownika(int idZalogowanego){
-        idZalogowanegoUzytkownika = idZalogowanego;
-    }
 
 int UzytkownikMenadzer::pobierzIdZalogowanegoUzytkownika(){
         return idZalogowanegoUzytkownika;
     }
+
+bool UzytkownikMenadzer::czyUzytkownikJestZalogowany(){
+    if (idZalogowanegoUzytkownika > 0)
+        return true;
+    else
+        return false;
+}
 

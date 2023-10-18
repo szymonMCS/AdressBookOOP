@@ -12,7 +12,6 @@
 #include "PlikZUzytkownikami.h"
 
 class UzytkownikMenadzer{
-
     int idZalogowanegoUzytkownika;
     std::vector <Uzytkownik> uzytkownicy;
     PlikZUzytkownikami plikZUzytkownikami;
@@ -23,19 +22,19 @@ class UzytkownikMenadzer{
 
 
 public:
-
-    UzytkownikMenadzer(std::string nazwaPlikuZUzytkownikami) : plikZUzytkownikami(nazwaPlikuZUzytkownikami) {};
-    //SETTERY
-    void ustawIdZalogowanegoUzytkownika(int idZalogowanego);
+    UzytkownikMenadzer(std::string nazwaPlikuZUzytkownikami) : plikZUzytkownikami(nazwaPlikuZUzytkownikami) {
+        idZalogowanegoUzytkownika = 0;
+        uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
+    };
     //GETTERY
     int pobierzIdZalogowanegoUzytkownika();
     //METODY
     void rejestracjaUzytkownika();
-    int logowanieUzytkownika();
+    void logowanieUzytkownika();
     void wypiszWszystkichUzytkownikow();
-    void wczytajUzytkownikowZPliku();
     void zmianaHaslaZalogowanegoUzytkownika();
     void wylogujUzytkownika();
+    bool czyUzytkownikJestZalogowany();
 
 };
 

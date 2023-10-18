@@ -4,7 +4,6 @@
 #include <iostream>
 
 class Adresat{
-
     int id;
     int idUzytkownika;
     std::string imie;
@@ -15,8 +14,7 @@ class Adresat{
 
 
 public:
-
-   //SETTERY
+    //SETTERY
     void ustawId(int input);
     void ustawIdUzytkownika(int input);
     void ustawImie(std::string input);

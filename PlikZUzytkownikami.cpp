@@ -1,10 +1,9 @@
 #include "PlikZUzytkownikami.h"
 
 void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik){
-
     std::string liniaZDanymiUzytkownika = "";
     std::fstream plikTekstowy;
-    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), std::ios::app);
+    plikTekstowy.open(NAZWA_PLIKU_Z_UZYTKOWNIKAMI.c_str(), std::ios::app);
 
     if (plikTekstowy.good() == true)
     {
@@ -20,12 +19,11 @@ void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik){
         }
     }
     else
-        std::cout << "Nie udalo sie otworzyc pliku " << nazwaPlikuZUzytkownikami << " i zapisac w nim danych." << std::endl;
+        std::cout << "Nie udalo sie otworzyc pliku " << NAZWA_PLIKU_Z_UZYTKOWNIKAMI << " i zapisac w nim danych." << std::endl;
     plikTekstowy.close();
 }
 
 bool PlikZUzytkownikami::czyPlikJestPusty(){
-
     std::fstream plikTekstowy;
 
     plikTekstowy.seekg(0, std::ios::end);
@@ -36,7 +34,6 @@ bool PlikZUzytkownikami::czyPlikJestPusty(){
 }
 
 std::string PlikZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik){
-
     std::string liniaZDanymiUzytkownika = "";
 
     liniaZDanymiUzytkownika += MetodyPomocnicze::konwersjaIntNaString(uzytkownik.pobierzId())+ '|';
@@ -47,13 +44,12 @@ std::string PlikZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPio
 }
 
 std::vector <Uzytkownik> PlikZUzytkownikami::wczytajUzytkownikowZPliku(){
-
     Uzytkownik uzytkownik;
     std::vector <Uzytkownik> uzytkownicy;
     std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
     std::fstream plikTekstowy;
 
-    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), std::ios::in);
+    plikTekstowy.open(NAZWA_PLIKU_Z_UZYTKOWNIKAMI.c_str(), std::ios::in);
 
     if (plikTekstowy.good() == true)
     {
@@ -70,7 +66,6 @@ std::vector <Uzytkownik> PlikZUzytkownikami::wczytajUzytkownikowZPliku(){
 }
 
 Uzytkownik PlikZUzytkownikami::pobierzDaneUzytkownika(std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami){
-
     Uzytkownik uzytkownik;
     std::string pojedynczaDanaUzytkownika = "";
     int numerPojedynczejDanejUzytkownika = 1;
@@ -102,12 +97,11 @@ Uzytkownik PlikZUzytkownikami::pobierzDaneUzytkownika(std::string daneJednegoUzy
     return uzytkownik;
 }
 
-void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkownik>& uzytkownicy)
-{
+void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkownik>& uzytkownicy){
     std::fstream plikTekstowy;
     std::string liniaZDanymiUzytkownika = "";
 
-    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), std::ios::out);
+    plikTekstowy.open(NAZWA_PLIKU_Z_UZYTKOWNIKAMI.c_str(), std::ios::out);
 
     if (plikTekstowy.good() == true)
     {
@@ -128,7 +122,7 @@ void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkow
     }
     else
     {
-        std::cout << "Nie mozna otworzyc pliku " << nazwaPlikuZUzytkownikami << std::endl;
+        std::cout << "Nie mozna otworzyc pliku " << NAZWA_PLIKU_Z_UZYTKOWNIKAMI << std::endl;
     }
     plikTekstowy.close();
 }

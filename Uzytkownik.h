@@ -4,13 +4,11 @@
 #include <iostream>
 
 class Uzytkownik{
-
     int id;
     std::string login;
     std::string haslo;
 
-    public:
-
+public:
     //SETTERY
     void ustawId(int input);
     void ustawLogin(std::string input);
