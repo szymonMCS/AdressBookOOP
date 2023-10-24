@@ -48,3 +48,30 @@ char MetodyPomocnicze::wczytajZnak(){
     }
     return znak;
 }
+
+std::string MetodyPomocnicze::pobierzLiczbe(std::string tekst, int pozycjaZnaku){
+    std::string liczba = "";
+    while(isdigit(tekst[pozycjaZnaku]) == true)
+    {
+        liczba += tekst[pozycjaZnaku];
+        pozycjaZnaku ++;
+    }
+    return liczba;
+}
+
+int MetodyPomocnicze::wczytajLiczbeCalkowita()
+{
+    std::string wejscie = "";
+    int liczba = 0;
+
+    while (true)
+    {
+        getline(std::cin, wejscie);
+
+        std::stringstream myStream(wejscie);
+        if (myStream >> liczba)
+            break;
+        std::cout << "To nie jest liczba. Wpisz ponownie. " << std::endl;
+    }
+    return liczba;
+}

@@ -19,14 +19,16 @@ class AdresatMenadzer {
 
     Adresat podajDaneNowegoAdresata();
     void wyswietlDaneAdresata(int input);
+    int podajIdWybranegoAdresata();
 
 public:
-    AdresatMenadzer(std::string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
-     : plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika) {
+    AdresatMenadzer(std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami, int idZalogowanegoUzytkownika)
+     : ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika), plikZAdresatami(nazwaPlikuZAdresatami, nazwaTymczasowegoPlikuZAdresatami) {
         adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
     };
     void dodajAdresata();
     void wyswietlWszystkichAdresatow();
+    void usunAdresata();
 };
 
 #endif // ADRESATMENADZER
