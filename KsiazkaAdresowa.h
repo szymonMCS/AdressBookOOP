@@ -11,18 +11,8 @@ class KsiazkaAdresowa {
     UzytkownikMenadzer uzytkownikMenadzer;
     AdresatMenadzer *adresatMenadzer;
     const std::string NAZWA_PLIKU_Z_ADRESATAMI;
+    const std::string NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI;
 
-public:
-    KsiazkaAdresowa(std::string nazwaPlikuZUzytkownikami, std::string nazwaPlikuZAdresatami)
-     : uzytkownikMenadzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami)
-     {
-         adresatMenadzer = NULL;
-     };
-     ~KsiazkaAdresowa()
-     {
-         delete adresatMenadzer;
-         adresatMenadzer = NULL;
-     };
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
     void logowanieUzytkownika();
@@ -33,7 +23,21 @@ public:
     bool czyUzytkownikJestZalogowany();
     char wybierzOpcjeZMenuGlownego();
     char wybierzOpcjeZMenuUzytkownika();
-    void menu();
+    void usunAdresata();
+
+public:
+    KsiazkaAdresowa(std::string nazwaPlikuZUzytkownikami, std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami)
+     : uzytkownikMenadzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami), NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI(nazwaTymczasowegoPlikuZAdresatami)
+     {
+         adresatMenadzer = NULL;
+     };
+     ~KsiazkaAdresowa()
+     {
+         delete adresatMenadzer;
+         adresatMenadzer = NULL;
+     };
+
+     void menu();
 };
 
 #endif // KSIAZKAADRESOWA_H

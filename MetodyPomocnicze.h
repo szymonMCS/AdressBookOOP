@@ -15,6 +15,8 @@ public:
     static std::string wczytajLinie();
     static std::string zamienPierwszaLitereNaDuzaAPozostaleNaMale(std::string tekst);
     static char wczytajZnak();
+    static std::string pobierzLiczbe(std::string tekst, int pozycjaZnaku);
+    static int wczytajLiczbeCalkowita();
 };
 
 #endif // METODYPOMOCNICZE_H

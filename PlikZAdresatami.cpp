@@ -1,7 +1,7 @@
 #include "PlikZAdresatami.h"
 
 int PlikZAdresatami::pobierzIdOstatniegoAdresata(){
-        return idOstatniegoAdresata;
+    return idOstatniegoAdresata;
 }
 
 std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
@@ -25,8 +25,9 @@ std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZP
         daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
         plikTekstowy.close();
     }
-    else
+    else{
         std::cout << "Nie udalo sie otworzyc pliku i wczytac danych." << std::endl;
+    }
         plikTekstowy.close();
         system("pause");
 
@@ -48,14 +49,14 @@ bool PlikZAdresatami::czyPlikJestPusty(std::fstream &plikTekstowy){
 
 int PlikZAdresatami::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami){
     int pozycjaRozpoczeciaIdUzytkownika = daneJednegoAdresataOddzielonePionowymiKreskami.find_first_of('|') + 1;
-    int idUzytkownika = MetodyPomocnicze::konwersjaStringNaInt(pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdUzytkownika));
+    int idUzytkownika = MetodyPomocnicze::konwersjaStringNaInt(MetodyPomocnicze::pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdUzytkownika));
 
     return idUzytkownika;
 }
 
 int PlikZAdresatami::pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami){
     int pozycjaRozpoczeciaIdAdresata = 0;
-    int idAdresata = MetodyPomocnicze::konwersjaStringNaInt(pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdAdresata));
+    int idAdresata = MetodyPomocnicze::konwersjaStringNaInt(MetodyPomocnicze::pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdAdresata));
     return idAdresata;
 }
 
@@ -103,16 +104,6 @@ Adresat PlikZAdresatami::pobierzDaneAdresata(std::string daneAdresataOddzieloneP
     return adresat;
 }
 
-std::string PlikZAdresatami::pobierzLiczbe(std::string tekst, int pozycjaZnaku){
-    std::string liczba = "";
-    while(isdigit(tekst[pozycjaZnaku]) == true)
-    {
-        liczba += tekst[pozycjaZnaku];
-        pozycjaZnaku ++;
-    }
-    return liczba;
-}
-
 bool PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat){
     std::string liniaZDanymiAdresata = "";
     std::fstream plikTekstowy;
@@ -154,4 +145,96 @@ std::string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowy
     liniaZDanymiAdresata += adresat.pobierzAdres() + '|';
 
     return liniaZDanymiAdresata;
+}
+
+int PlikZAdresatami::usunWybranegoAdresataZPlikuTekstowego (int idAdresata){
+    bool czyIstniejeAdresat = false;
+    int numerWczytanejLiniiZPliku = 1;
+    int numerUsuwanejLinii = 1;
+    std::string wczytanaLinia = "";
+    std::fstream plikTekstowy;
+    std::fstream tymczasowyPlikTekstowy;
+    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::in);
+    tymczasowyPlikTekstowy.open(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI.c_str(), std::ios::out | std::ios::app);
+
+    if (plikTekstowy.good() == true && idAdresata != 0)
+    {
+        while(getline(plikTekstowy, wczytanaLinia))
+        {
+            if(idAdresata == pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(wczytanaLinia))
+            {
+                czyIstniejeAdresat = true;
+                numerUsuwanejLinii = numerWczytanejLiniiZPliku;
+                podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idAdresata);
+            }
+            else if (numerWczytanejLiniiZPliku == 1 && numerWczytanejLiniiZPliku != numerUsuwanejLinii)
+                tymczasowyPlikTekstowy << wczytanaLinia;
+            else if (numerWczytanejLiniiZPliku == 2 && numerUsuwanejLinii == 1)
+                tymczasowyPlikTekstowy << wczytanaLinia;
+            else if (numerWczytanejLiniiZPliku > 2 && numerUsuwanejLinii == 1)
+                tymczasowyPlikTekstowy << std::endl << wczytanaLinia;
+            else if (numerWczytanejLiniiZPliku > 1 && numerUsuwanejLinii != 1)
+                tymczasowyPlikTekstowy << std::endl << wczytanaLinia;
+            numerWczytanejLiniiZPliku++;
+
+        }
+        if (czyIstniejeAdresat == false)
+        {
+            plikTekstowy.close();
+            return 0;
+        }
+
+        plikTekstowy.close();
+        tymczasowyPlikTekstowy.close();
+
+        usunPlik(NAZWA_PLIKU_Z_ADRESATAMI);
+        zmienNazwePliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, NAZWA_PLIKU_Z_ADRESATAMI);
+    }
+    return idOstatniegoAdresata;
+}
+
+void PlikZAdresatami::usunPlik(std::string nazwaPlikuZRozszerzeniem)
+{
+    if (remove(nazwaPlikuZRozszerzeniem.c_str()) == 0) {}
+    else
+        std::cout << "Nie udalo sie usunac pliku " << nazwaPlikuZRozszerzeniem << std::endl;
+}
+
+void PlikZAdresatami::zmienNazwePliku(std::string staraNazwa, std::string nowaNazwa)
+{
+    if (rename(staraNazwa.c_str(), nowaNazwa.c_str()) == 0) {}
+    else
+        std::cout << "Nazwa pliku nie zostala zmieniona." << staraNazwa << std::endl;
+}
+
+int PlikZAdresatami::podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(int idUsuwanegoAdresata)
+{
+    if (idUsuwanegoAdresata == idOstatniegoAdresata)
+        return pobierzZPlikuIdOstatniegoAdresata();
+    else
+        return idOstatniegoAdresata;
+}
+
+int PlikZAdresatami::pobierzZPlikuIdOstatniegoAdresata()
+{
+    int idOstatniegoAdresata = 0;
+    std::string daneJednegoAdresataOddzielonePionowymiKreskami = "";
+    std::string daneOstaniegoAdresataWPliku = "";
+    std::fstream plikTekstowy;
+    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::in);
+
+    if (plikTekstowy.good() == true)
+    {
+        while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)) {}
+            daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
+            plikTekstowy.close();
+    }
+    else
+        std::cout << "Nie udalo sie otworzyc pliku i wczytac danych." << std::endl;
+
+    if (daneOstaniegoAdresataWPliku != "")
+    {
+        idOstatniegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
+    }
+    return idOstatniegoAdresata;
 }

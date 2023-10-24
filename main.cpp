@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt", "Adresaci.txt");
+    KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt", "Adresaci.txt", "Adresaci_temp.txt");
     ksiazkaAdresowa.menu();
 
     /*ksiazkaAdresowa.wypiszWszystkichUzytkownikow();
@@ -29,7 +29,7 @@ int main()
 
 int testyAdresata_main(){
 
-    AdresatMenadzer adresatMenadzer("Adresaci.txt", 2);
+    AdresatMenadzer adresatMenadzer("Adresaci.txt", "Adresaci_temp.txt", 2);
     adresatMenadzer.wyswietlWszystkichAdresatow();
     adresatMenadzer.dodajAdresata();
     adresatMenadzer.wyswietlWszystkichAdresatow();
@@ -42,7 +42,7 @@ int testyAdresata_main(){
 #include "PlikZAdresatami.h"
 
 int testyPlikuAdr_main(){
-    PlikZAdresatami plikZAdresatami("Adresaci-test.txt");
+    PlikZAdresatami plikZAdresatami("Adresaci-test.txt", "Adresaci_temp.txt");
     Adresat adresat(1, 9, "Janek", "Twardowski", "999 888 333", "janek@o2.pl", "ul. Jankowa 3a");
 
     plikZAdresatami.dopiszAdresataDoPliku(adresat);

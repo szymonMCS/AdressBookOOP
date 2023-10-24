@@ -14,10 +14,20 @@ void KsiazkaAdresowa::dodajAdresata() {
     }
 }
 
+void KsiazkaAdresowa::usunAdresata() {
+    if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
+        adresatMenadzer->usunAdresata();
+    }
+    else{
+        std::cout << "Aby usunac adresata, nalezy najpierw sie zalogowac" << std::endl;
+        system("pause");
+    }
+}
+
 void KsiazkaAdresowa::logowanieUzytkownika(){
     uzytkownikMenadzer.logowanieUzytkownika();
     if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
-        adresatMenadzer = new AdresatMenadzer(NAZWA_PLIKU_Z_ADRESATAMI,uzytkownikMenadzer.pobierzIdZalogowanegoUzytkownika());
+        adresatMenadzer = new AdresatMenadzer(NAZWA_PLIKU_Z_ADRESATAMI, NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, uzytkownikMenadzer.pobierzIdZalogowanegoUzytkownika());
     }
 }
 
@@ -44,7 +54,7 @@ void KsiazkaAdresowa::wyswietlWszystkichAdresatow() {
 }
 
 bool KsiazkaAdresowa::czyUzytkownikJestZalogowany(){
-    uzytkownikMenadzer.czyUzytkownikJestZalogowany();
+    return uzytkownikMenadzer.czyUzytkownikJestZalogowany();
 }
 
 char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
@@ -139,11 +149,10 @@ void KsiazkaAdresowa::menu(){
             case '4':
                 wyswietlWszystkichAdresatow();
                 break;
-            /*case '5':
-                idUsunietegoAdresata = usunAdresata(adresaci);
-                idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
+            case '5':
+                usunAdresata();
                 break;
-            case '6':
+            /*case '6':
                 edytujAdresata(adresaci);
                 break;*/
             case '7':

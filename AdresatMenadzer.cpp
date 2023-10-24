@@ -77,3 +77,51 @@ void AdresatMenadzer::wyswietlDaneAdresata(int input){
     std::cout <<              "Adres:              " << adresaci[input].pobierzAdres() << std::endl;
 }
 
+void AdresatMenadzer::usunAdresata(){
+    int idUsuwanegoAdresata = 0;
+    int numerLiniiUsuwanegoAdresata = 0;
+
+    system("cls");
+    std::cout << ">>> USUWANIE WYBRANEGO ADRESATA <<<" << std::endl << std::endl;
+    idUsuwanegoAdresata = podajIdWybranegoAdresata();
+
+    char znak;
+    bool czyIstniejeAdresat = false;
+
+    for (std::vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++)
+    {
+        if (itr -> pobierzId() == idUsuwanegoAdresata)
+        {
+            czyIstniejeAdresat = true;
+            std::cout << std::endl << "Potwierdz naciskajac klawisz 't': ";
+            znak = MetodyPomocnicze::wczytajZnak();
+            if (znak == 't')
+            {
+                plikZAdresatami.usunWybranegoAdresataZPlikuTekstowego(idUsuwanegoAdresata);
+                adresaci.erase(itr);
+                std::cout << std::endl << std::endl << "Szukany adresat zostal USUNIETY" << std::endl << std::endl;
+                system("pause");
+            }
+            else
+            {
+                std::cout << std::endl << std::endl << "Wybrany adresat NIE zostal usuniety" << std::endl << std::endl;
+                system("pause");
+            }
+        }
+    }
+
+
+
+    if (czyIstniejeAdresat == false)
+    {
+        std::cout << std::endl << "Nie ma takiego adresata w ksiazce adresowej" << std::endl << std::endl;
+        system("pause");
+    }
+}
+
+int AdresatMenadzer::podajIdWybranegoAdresata(){
+    int idWybranegoAdresata = 0;
+    std::cout << "Podaj numer ID Adresata: ";
+    idWybranegoAdresata  = MetodyPomocnicze::wczytajLiczbeCalkowita();
+    return idWybranegoAdresata;
+}
