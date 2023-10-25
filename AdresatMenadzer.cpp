@@ -79,7 +79,6 @@ void AdresatMenadzer::wyswietlDaneAdresata(int input){
 
 void AdresatMenadzer::usunAdresata(){
     int idUsuwanegoAdresata = 0;
-    int numerLiniiUsuwanegoAdresata = 0;
 
     system("cls");
     std::cout << ">>> USUWANIE WYBRANEGO ADRESATA <<<" << std::endl << std::endl;
@@ -109,9 +108,6 @@ void AdresatMenadzer::usunAdresata(){
             }
         }
     }
-
-
-
     if (czyIstniejeAdresat == false)
     {
         std::cout << std::endl << "Nie ma takiego adresata w ksiazce adresowej" << std::endl << std::endl;

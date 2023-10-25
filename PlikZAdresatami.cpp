@@ -10,7 +10,7 @@ std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZP
     std::string daneJednegoAdresataOddzielonePionowymiKreskami = "";
     std::string daneOstaniegoAdresataWPliku = "";
     std::fstream plikTekstowy;
-    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::in);
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
 
     if (plikTekstowy.good() == true)
     {
@@ -36,15 +36,6 @@ std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZP
         idOstatniegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
     }
     return adresaci;
-}
-
-bool PlikZAdresatami::czyPlikJestPusty(std::fstream &plikTekstowy){
-
-    plikTekstowy.seekg(0, std::ios::end);
-    if (plikTekstowy.tellg() == 0)
-        return true;
-    else
-        return false;
 }
 
 int PlikZAdresatami::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami){
@@ -107,13 +98,13 @@ Adresat PlikZAdresatami::pobierzDaneAdresata(std::string daneAdresataOddzieloneP
 bool PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat){
     std::string liniaZDanymiAdresata = "";
     std::fstream plikTekstowy;
-    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::out | std::ios::app);
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::out | std::ios::app);
 
     if (plikTekstowy.good() == true)
     {
         liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
 
-        if (czyPlikJestPusty(plikTekstowy) == true)
+        if (PlikTekstowy::czyPlikJestPusty() == true)
         {
             plikTekstowy << liniaZDanymiAdresata;
         }
@@ -154,7 +145,7 @@ int PlikZAdresatami::usunWybranegoAdresataZPlikuTekstowego (int idAdresata){
     std::string wczytanaLinia = "";
     std::fstream plikTekstowy;
     std::fstream tymczasowyPlikTekstowy;
-    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::in);
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
     tymczasowyPlikTekstowy.open(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI.c_str(), std::ios::out | std::ios::app);
 
     if (plikTekstowy.good() == true && idAdresata != 0)
@@ -187,8 +178,8 @@ int PlikZAdresatami::usunWybranegoAdresataZPlikuTekstowego (int idAdresata){
         plikTekstowy.close();
         tymczasowyPlikTekstowy.close();
 
-        usunPlik(NAZWA_PLIKU_Z_ADRESATAMI);
-        zmienNazwePliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, NAZWA_PLIKU_Z_ADRESATAMI);
+        usunPlik(PlikTekstowy::pobierzNazwePliku());
+        zmienNazwePliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, PlikTekstowy::pobierzNazwePliku());
     }
     return idOstatniegoAdresata;
 }
@@ -221,7 +212,7 @@ int PlikZAdresatami::pobierzZPlikuIdOstatniegoAdresata()
     std::string daneJednegoAdresataOddzielonePionowymiKreskami = "";
     std::string daneOstaniegoAdresataWPliku = "";
     std::fstream plikTekstowy;
-    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), std::ios::in);
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
 
     if (plikTekstowy.good() == true)
     {

@@ -6,15 +6,15 @@
 #include <fstream>
 #include <cstdlib>
 
+#include "PlikTekstowy.h"
 #include "Adresat.h"
 #include "MetodyPomocnicze.h"
 
-class PlikZAdresatami{
-    const std::string NAZWA_PLIKU_Z_ADRESATAMI;
+class PlikZAdresatami : public PlikTekstowy{
     const std::string NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI;
     int idOstatniegoAdresata;
 
-    bool czyPlikJestPusty(std::fstream &plikTekstowy);
+    bool czyPlikJestPusty();
     int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami);
     int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami);
     Adresat pobierzDaneAdresata(std::string daneAdresataOddzielonePionowymiKreskami);
@@ -25,15 +25,13 @@ class PlikZAdresatami{
     int pobierzZPlikuIdOstatniegoAdresata();
 
 public:
-    //METODY
     PlikZAdresatami(std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami)
-    : NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami), NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI(nazwaTymczasowegoPlikuZAdresatami) {
+    : PlikTekstowy(nazwaPlikuZAdresatami), NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI(nazwaTymczasowegoPlikuZAdresatami){
         idOstatniegoAdresata = 0;
     };
     std::vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanego);
     bool dopiszAdresataDoPliku(Adresat adresat);
     int usunWybranegoAdresataZPlikuTekstowego (int idAdresata);
-    //GETTERY
     int pobierzIdOstatniegoAdresata();
 };
 

@@ -10,7 +10,7 @@
 class KsiazkaAdresowa {
     UzytkownikMenadzer uzytkownikMenadzer;
     AdresatMenadzer *adresatMenadzer;
-    const std::string NAZWA_PLIKU_Z_ADRESATAMI;
+    const std::string NAZWA_PLIKU;
     const std::string NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI;
 
     void rejestracjaUzytkownika();
@@ -27,7 +27,7 @@ class KsiazkaAdresowa {
 
 public:
     KsiazkaAdresowa(std::string nazwaPlikuZUzytkownikami, std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami)
-     : uzytkownikMenadzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami), NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI(nazwaTymczasowegoPlikuZAdresatami)
+     : uzytkownikMenadzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU(nazwaPlikuZAdresatami), NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI(nazwaTymczasowegoPlikuZAdresatami)
      {
          adresatMenadzer = NULL;
      };
