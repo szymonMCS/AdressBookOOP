@@ -6,11 +6,11 @@
 #include <fstream>
 #include <cstdlib>
 
+#include "PlikTekstowy.h"
 #include "Uzytkownik.h"
 #include "MetodyPomocnicze.h"
 
-class PlikZUzytkownikami{
-    const std::string NAZWA_PLIKU_Z_UZYTKOWNIKAMI;
+class PlikZUzytkownikami : public PlikTekstowy{
 
     bool czyPlikJestPusty();
     std::string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
@@ -18,8 +18,7 @@ class PlikZUzytkownikami{
 
 public:
 
-    PlikZUzytkownikami(std::string nazwaPlikuZUzytkownikami) : NAZWA_PLIKU_Z_UZYTKOWNIKAMI(nazwaPlikuZUzytkownikami) {};
-    //METODY
+    PlikZUzytkownikami(std::string nazwaPlikuZUzytkownikami) : PlikTekstowy(nazwaPlikuZUzytkownikami) {};
     void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
     std::vector <Uzytkownik>  wczytajUzytkownikowZPliku();
     void zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkownik>& uzytkownicy);

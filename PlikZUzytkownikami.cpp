@@ -3,13 +3,13 @@
 void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik){
     std::string liniaZDanymiUzytkownika = "";
     std::fstream plikTekstowy;
-    plikTekstowy.open(NAZWA_PLIKU_Z_UZYTKOWNIKAMI.c_str(), std::ios::app);
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::app);
 
     if (plikTekstowy.good() == true)
     {
         liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);
 
-        if (czyPlikJestPusty() == true)
+        if (PlikTekstowy::czyPlikJestPusty() == true)
         {
             plikTekstowy << liniaZDanymiUzytkownika;
         }
@@ -19,18 +19,8 @@ void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik){
         }
     }
     else
-        std::cout << "Nie udalo sie otworzyc pliku " << NAZWA_PLIKU_Z_UZYTKOWNIKAMI << " i zapisac w nim danych." << std::endl;
+        std::cout << "Nie udalo sie otworzyc pliku " << PlikTekstowy::pobierzNazwePliku() << " i zapisac w nim danych." << std::endl;
     plikTekstowy.close();
-}
-
-bool PlikZUzytkownikami::czyPlikJestPusty(){
-    std::fstream plikTekstowy;
-
-    plikTekstowy.seekg(0, std::ios::end);
-    if (plikTekstowy.tellg() == 0)
-        return true;
-    else
-        return false;
 }
 
 std::string PlikZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik){
@@ -49,7 +39,7 @@ std::vector <Uzytkownik> PlikZUzytkownikami::wczytajUzytkownikowZPliku(){
     std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
     std::fstream plikTekstowy;
 
-    plikTekstowy.open(NAZWA_PLIKU_Z_UZYTKOWNIKAMI.c_str(), std::ios::in);
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
 
     if (plikTekstowy.good() == true)
     {
@@ -101,7 +91,7 @@ void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkow
     std::fstream plikTekstowy;
     std::string liniaZDanymiUzytkownika = "";
 
-    plikTekstowy.open(NAZWA_PLIKU_Z_UZYTKOWNIKAMI.c_str(), std::ios::out);
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::out);
 
     if (plikTekstowy.good() == true)
     {
@@ -122,7 +112,7 @@ void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(std::vector<Uzytkow
     }
     else
     {
-        std::cout << "Nie mozna otworzyc pliku " << NAZWA_PLIKU_Z_UZYTKOWNIKAMI << std::endl;
+        std::cout << "Nie mozna otworzyc pliku " << PlikTekstowy::pobierzNazwePliku() << std::endl;
     }
     plikTekstowy.close();
 }

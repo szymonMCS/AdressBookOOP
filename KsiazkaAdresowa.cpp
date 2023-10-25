@@ -27,7 +27,7 @@ void KsiazkaAdresowa::usunAdresata() {
 void KsiazkaAdresowa::logowanieUzytkownika(){
     uzytkownikMenadzer.logowanieUzytkownika();
     if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
-        adresatMenadzer = new AdresatMenadzer(NAZWA_PLIKU_Z_ADRESATAMI, NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, uzytkownikMenadzer.pobierzIdZalogowanegoUzytkownika());
+        adresatMenadzer = new AdresatMenadzer(NAZWA_PLIKU, NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, uzytkownikMenadzer.pobierzIdZalogowanegoUzytkownika());
     }
 }
 
@@ -85,7 +85,7 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
     //cout << "2. Wyszukaj po imieniu" << endl;
     //cout << "3. Wyszukaj po nazwisku" << endl;
     std::cout << "4. Wyswietl adresatow" << std::endl;
-    //cout << "5. Usun adresata" << endl;
+    std::cout << "5. Usun adresata" << std::endl;
     //cout << "6. Edytuj adresata" << endl;
     std::cout << "---------------------------" << std::endl;
     std::cout << "7. Zmien haslo" << std::endl;
