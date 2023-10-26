@@ -229,3 +229,52 @@ int PlikZAdresatami::pobierzZPlikuIdOstatniegoAdresata()
     }
     return idOstatniegoAdresata;
 }
+
+void PlikZAdresatami::edytujWybranegoAdresataZPlikuTekstowego(Adresat adresat, int idAdresata){
+    bool czyIstniejeAdresat = false;
+    int numerWczytanejLiniiZPliku = 1;
+    std::string wczytanaLinia = "";
+    std::string liniaZDanymiAdresata = "";
+    std::fstream plikTekstowy;
+    std::fstream tymczasowyPlikTekstowy;
+    plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
+    tymczasowyPlikTekstowy.open(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI.c_str(), std::ios::out | std::ios::app);
+
+    if (plikTekstowy.good() == true && idAdresata != 0)
+    {
+        while (getline(plikTekstowy, wczytanaLinia))
+        {
+            if (idAdresata == pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(wczytanaLinia)){
+                czyIstniejeAdresat = true;
+                liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
+
+                if (numerWczytanejLiniiZPliku == 1){
+                    tymczasowyPlikTekstowy << liniaZDanymiAdresata;
+                }
+                else if (numerWczytanejLiniiZPliku > 1)
+                    tymczasowyPlikTekstowy << std::endl << liniaZDanymiAdresata;
+            }
+            else
+            {
+                if (numerWczytanejLiniiZPliku == 1)
+                    tymczasowyPlikTekstowy << wczytanaLinia;
+                else if (numerWczytanejLiniiZPliku > 1)
+                    tymczasowyPlikTekstowy << std::endl << wczytanaLinia;
+            }
+            numerWczytanejLiniiZPliku++;
+        }
+        if (czyIstniejeAdresat == false){
+            plikTekstowy.close();
+            std::cout << std::endl << "Adresat nie istnieje." << std::endl << std::endl;
+            system("pause");
+        }
+
+        plikTekstowy.close();
+        tymczasowyPlikTekstowy.close();
+
+        usunPlik(PlikTekstowy::pobierzNazwePliku());
+        zmienNazwePliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, PlikTekstowy::pobierzNazwePliku());
+    }
+
+    std::cout << std::endl << "Dane zostaly zaktualizowane." << std::endl << std::endl;
+}

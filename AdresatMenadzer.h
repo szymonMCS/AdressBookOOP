@@ -20,6 +20,8 @@ class AdresatMenadzer {
     Adresat podajDaneNowegoAdresata();
     void wyswietlDaneAdresata(int input);
     int podajIdWybranegoAdresata();
+    void zaktualizujDaneWybranegoAdresata(Adresat adresat, int idEdytowanegoAdresata);
+    char wybierzOpcjeZMenuEdycja();
 
 public:
     AdresatMenadzer(std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami, int idZalogowanegoUzytkownika)
@@ -29,6 +31,7 @@ public:
     void dodajAdresata();
     void wyswietlWszystkichAdresatow();
     void usunAdresata();
+    void edytujAdresata();
 };
 
 #endif // ADRESATMENADZER

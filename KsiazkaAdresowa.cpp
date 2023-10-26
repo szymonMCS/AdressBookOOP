@@ -6,7 +6,7 @@ void KsiazkaAdresowa::rejestracjaUzytkownika(){
 
 void KsiazkaAdresowa::dodajAdresata() {
     if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
-        adresatMenadzer->dodajAdresata();
+        adresatMenadzer -> dodajAdresata();
     }
     else{
         std::cout << "Aby dodac adresata, nalezy najpierw sie zalogowac" << std::endl;
@@ -16,10 +16,20 @@ void KsiazkaAdresowa::dodajAdresata() {
 
 void KsiazkaAdresowa::usunAdresata() {
     if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
-        adresatMenadzer->usunAdresata();
+        adresatMenadzer -> usunAdresata();
     }
     else{
         std::cout << "Aby usunac adresata, nalezy najpierw sie zalogowac" << std::endl;
+        system("pause");
+    }
+}
+
+void KsiazkaAdresowa::edytujAdresata() {
+    if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
+        adresatMenadzer -> edytujAdresata();
+    }
+    else{
+        std::cout << "Aby edytowac adresata, nalezy najpierw sie zalogowac" << std::endl;
         system("pause");
     }
 }
@@ -86,7 +96,7 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
     //cout << "3. Wyszukaj po nazwisku" << endl;
     std::cout << "4. Wyswietl adresatow" << std::endl;
     std::cout << "5. Usun adresata" << std::endl;
-    //cout << "6. Edytuj adresata" << endl;
+    std::cout << "6. Edytuj adresata" << std::endl;
     std::cout << "---------------------------" << std::endl;
     std::cout << "7. Zmien haslo" << std::endl;
     std::cout << "8. Wyloguj sie" << std::endl;
@@ -126,13 +136,6 @@ void KsiazkaAdresowa::menu(){
         }
         else
         {
-
-           /* if (adresaci.empty() == true)
-                // Pobieramy idOstatniegoAdresata, po to aby zoptymalizowac program.
-                // Dzieki temu, kiedy uztykwonik bedzie dodawal nowego adresata
-                // to nie bedziemy musieli jeszcze raz ustalac idOstatniegoAdresata
-                idOstatniegoAdresata = wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);*/
-
             wybor = wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor)
@@ -152,9 +155,9 @@ void KsiazkaAdresowa::menu(){
             case '5':
                 usunAdresata();
                 break;
-            /*case '6':
-                edytujAdresata(adresaci);
-                break;*/
+            case '6':
+                edytujAdresata();
+                break;
             case '7':
                 zmianaHaslaZalogowanegoUzytkownika();
                 break;

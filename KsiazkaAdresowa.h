@@ -24,6 +24,7 @@ class KsiazkaAdresowa {
     char wybierzOpcjeZMenuGlownego();
     char wybierzOpcjeZMenuUzytkownika();
     void usunAdresata();
+    void edytujAdresata();
 
 public:
     KsiazkaAdresowa(std::string nazwaPlikuZUzytkownikami, std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami)
