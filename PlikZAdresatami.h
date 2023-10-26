@@ -32,6 +32,7 @@ public:
     std::vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanego);
     bool dopiszAdresataDoPliku(Adresat adresat);
     int usunWybranegoAdresataZPlikuTekstowego (int idAdresata);
+    void edytujWybranegoAdresataZPlikuTekstowego (Adresat adresat, int idAdresata);
     int pobierzIdOstatniegoAdresata();
 };
 

@@ -121,3 +121,87 @@ int AdresatMenadzer::podajIdWybranegoAdresata(){
     idWybranegoAdresata  = MetodyPomocnicze::wczytajLiczbeCalkowita();
     return idWybranegoAdresata;
 }
+
+void AdresatMenadzer::edytujAdresata(){
+    system("cls");
+    Adresat adresat;
+    int idEdytowanegoAdresata = 0;
+    std::string liniaZDanymiAdresata = "";
+
+    std::cout << ">>> EDYCJA WYBRANEGO ADRESATA <<<" << std::endl << std::endl;
+    idEdytowanegoAdresata = podajIdWybranegoAdresata();
+
+    char wybor;
+    bool czyIstniejeAdresat = false;
+
+    for (std::string::size_type i = 0; i < adresaci.size(); i++)
+    {
+        if (adresaci[i].pobierzId() == idEdytowanegoAdresata)
+        {
+            czyIstniejeAdresat = true;
+            wybor = wybierzOpcjeZMenuEdycja();
+
+            switch (wybor)
+            {
+            case '1':
+                std::cout << "Podaj nowe imie: ";
+                adresaci[i].ustawImie(MetodyPomocnicze::wczytajLinie());
+                adresaci[i].ustawImie(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresaci[i].pobierzImie()));
+                plikZAdresatami.edytujWybranegoAdresataZPlikuTekstowego(adresaci[i], idEdytowanegoAdresata);
+                break;
+            case '2':
+                std::cout << "Podaj nowe nazwisko: ";
+                adresaci[i].ustawNazwisko(MetodyPomocnicze::wczytajLinie());
+                adresaci[i].ustawNazwisko(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresaci[i].pobierzNazwisko()));
+                plikZAdresatami.edytujWybranegoAdresataZPlikuTekstowego(adresaci[i], idEdytowanegoAdresata);
+                break;
+            case '3':
+                std::cout << "Podaj nowy numer telefonu: ";
+                adresaci[i].ustawNumerTelefonu(MetodyPomocnicze::wczytajLinie());
+                plikZAdresatami.edytujWybranegoAdresataZPlikuTekstowego(adresaci[i], idEdytowanegoAdresata);
+                break;
+            case '4':
+                std::cout << "Podaj nowy email: ";
+                adresaci[i].ustawEmail(MetodyPomocnicze::wczytajLinie());
+                plikZAdresatami.edytujWybranegoAdresataZPlikuTekstowego(adresaci[i], idEdytowanegoAdresata);
+                break;
+            case '5':
+                std::cout << "Podaj nowy adres zamieszkania: ";
+                adresaci[i].ustawAdres(MetodyPomocnicze::wczytajLinie());
+                plikZAdresatami.edytujWybranegoAdresataZPlikuTekstowego(adresaci[i], idEdytowanegoAdresata);
+                break;
+            case '6':
+                std::cout << std::endl << "Powrot do menu uzytkownika" << std::endl << std::endl;
+                break;
+            default:
+                std::cout << std::endl << "Nie ma takiej opcji w menu! Powrot do menu uzytkownika." << std::endl << std::endl;
+                break;
+            }
+        }
+    }
+    if (czyIstniejeAdresat == false)
+    {
+        std::cout << std::endl << "Nie ma takiego adresata." << std::endl << std::endl;
+    }
+    system("pause");
+}
+
+
+
+char AdresatMenadzer::wybierzOpcjeZMenuEdycja(){
+    char wybor;
+
+    std::cout << std::endl << "   >>> MENU  EDYCJA <<<" << std::endl;
+    std::cout << "---------------------------" << std::endl;
+    std::cout << "Ktore dane zaktualizowac: " << std::endl;
+    std::cout << "1 - Imie" << std::endl;
+    std::cout << "2 - Nazwisko" << std::endl;
+    std::cout << "3 - Numer telefonu" << std::endl;
+    std::cout << "4 - Email" << std::endl;
+    std::cout << "5 - Adres" << std::endl;
+    std::cout << "6 - Powrot " << std::endl;
+    std::cout << std::endl << "Twoj wybor: ";
+    wybor = MetodyPomocnicze::wczytajZnak();
+
+    return wybor;
+}
