@@ -59,7 +59,19 @@ void KsiazkaAdresowa::wypiszWszystkichUzytkownikow(){
 
 void KsiazkaAdresowa::wyswietlWszystkichAdresatow() {
     if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
-        adresatMenadzer->wyswietlWszystkichAdresatow();
+        adresatMenadzer -> wyswietlWszystkichAdresatow();
+    }
+}
+
+void KsiazkaAdresowa::wyszukajAdresatowPoImieniu(){
+    if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
+        adresatMenadzer -> wyszukajAdresatowPoImieniu();
+    }
+}
+
+void KsiazkaAdresowa::wyszukajAdresatowPoNazwisku(){
+    if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
+        adresatMenadzer -> wyszukajAdresatowPoNazwisku();
     }
 }
 
@@ -92,8 +104,8 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
     std::cout << " >>> MENU UZYTKOWNIKA <<<" << std::endl;
     std::cout << "---------------------------" << std::endl;
     std::cout << "1. Dodaj adresata" << std::endl;
-    //cout << "2. Wyszukaj po imieniu" << endl;
-    //cout << "3. Wyszukaj po nazwisku" << endl;
+    std::cout << "2. Wyszukaj po imieniu" << std::endl;
+    std::cout << "3. Wyszukaj po nazwisku" << std::endl;
     std::cout << "4. Wyswietl adresatow" << std::endl;
     std::cout << "5. Usun adresata" << std::endl;
     std::cout << "6. Edytuj adresata" << std::endl;
@@ -143,12 +155,12 @@ void KsiazkaAdresowa::menu(){
             case '1':
                 dodajAdresata();
                 break;
-            /*case '2':
-                wyszukajAdresatowPoImieniu(adresaci);
+            case '2':
+                wyszukajAdresatowPoImieniu();
                 break;
             case '3':
-                wyszukajAdresatowPoNazwisku(adresaci);
-                break;*/
+                wyszukajAdresatowPoNazwisku();
+                break;
             case '4':
                 wyswietlWszystkichAdresatow();
                 break;

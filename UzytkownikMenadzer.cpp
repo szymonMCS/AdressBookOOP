@@ -72,7 +72,6 @@ void UzytkownikMenadzer::logowanieUzytkownika(){
                 if (uzytkownicy[i].pobierzHaslo() == haslo)
                 {
                     std::cout << std::endl << "Zalogowales sie." << std::endl << std::endl;
-                    system("pause");
                     idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
                     return;
                 }

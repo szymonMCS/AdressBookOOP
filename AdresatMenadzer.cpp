@@ -205,3 +205,67 @@ char AdresatMenadzer::wybierzOpcjeZMenuEdycja(){
 
     return wybor;
 }
+
+void AdresatMenadzer::wyswietlIloscWyszukanychAdresatow(int iloscAdresatow){
+    if (iloscAdresatow == 0){
+        std::cout << std::endl << "W ksiazce adresowej nie ma adresatow z tymi danymi." << std::endl;
+    }
+    else{
+        std::cout << std::endl << "Ilosc adresatow w ksiazce adresowej wynosi: " << iloscAdresatow << std::endl << std::endl;
+    }
+}
+
+void AdresatMenadzer::wyszukajAdresatowPoImieniu(){
+    std::string imiePoszukiwanegoAdresata = "";
+    int iloscAdresatow = 0;
+
+    system("cls");
+    if (!adresaci.empty()){
+        std::cout << ">>> WYSZUKIWANIE ADRESATOW O IMIENIU <<<" << std::endl << std::endl;
+
+        std::cout << "Wyszukaj adresatow o imieniu: ";
+        imiePoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
+        imiePoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imiePoszukiwanegoAdresata);
+
+        for (std::string::size_type i = 0; i < adresaci.size(); i++){
+            if (adresaci[i].pobierzImie() == imiePoszukiwanegoAdresata){
+                wyswietlDaneAdresata(i);
+                iloscAdresatow++;
+            }
+        }
+        wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
+    }
+    else{
+        std::cout << std::endl << "Ksiazka adresowa jest pusta" << std::endl << std::endl;
+    }
+    std::cout << std::endl;
+    system("pause");
+}
+
+void AdresatMenadzer::wyszukajAdresatowPoNazwisku(){
+    std::string nazwiskoPoszukiwanegoAdresata;
+    int iloscAdresatow = 0;
+
+    system("cls");
+    if (!adresaci.empty()){
+        std::cout << ">>> WYSZUKIWANIE ADRESATOW O NAZWISKU <<<" << std::endl << std::endl;
+
+        std::cout << "Wyszukaj adresatow o nazwisku: ";
+        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
+        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwiskoPoszukiwanegoAdresata);
+
+        for (std::string::size_type i = 0; i < adresaci.size(); i++){
+            if (adresaci[i].pobierzNazwisko() == nazwiskoPoszukiwanegoAdresata){
+                wyswietlDaneAdresata(i);
+                iloscAdresatow++;
+            }
+        }
+         wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
+    }
+    else
+    {
+        std::cout << std::endl << "Ksiazka adresowa jest pusta." << std::endl << std::endl;
+    }
+    std::cout << std::endl;
+    system("pause");
+}

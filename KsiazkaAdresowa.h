@@ -25,6 +25,8 @@ class KsiazkaAdresowa {
     char wybierzOpcjeZMenuUzytkownika();
     void usunAdresata();
     void edytujAdresata();
+    void wyszukajAdresatowPoImieniu();
+    void wyszukajAdresatowPoNazwisku();
 
 public:
     KsiazkaAdresowa(std::string nazwaPlikuZUzytkownikami, std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami)
