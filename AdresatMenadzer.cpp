@@ -108,7 +108,7 @@ void AdresatMenadzer::usunAdresata(){
             }
         }
     }
-    if (czyIstniejeAdresat == false)
+    if (!czyIstniejeAdresat)
     {
         std::cout << std::endl << "Nie ma takiego adresata w ksiazce adresowej" << std::endl << std::endl;
         system("pause");

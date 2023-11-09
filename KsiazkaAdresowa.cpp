@@ -37,7 +37,7 @@ void KsiazkaAdresowa::edytujAdresata() {
 void KsiazkaAdresowa::logowanieUzytkownika(){
     uzytkownikMenadzer.logowanieUzytkownika();
     if (uzytkownikMenadzer.czyUzytkownikJestZalogowany()){
-        adresatMenadzer = new AdresatMenadzer(NAZWA_PLIKU, NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, uzytkownikMenadzer.pobierzIdZalogowanegoUzytkownika());
+        adresatMenadzer = new AdresatMenadzer(NAZWA_PLIKU, uzytkownikMenadzer.pobierzIdZalogowanegoUzytkownika());
     }
 }
 

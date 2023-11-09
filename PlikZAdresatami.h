@@ -14,7 +14,6 @@ class PlikZAdresatami : public PlikTekstowy{
     const std::string NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI;
     int idOstatniegoAdresata;
 
-    bool czyPlikJestPusty();
     int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami);
     int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(std::string daneJednegoAdresataOddzielonePionowymiKreskami);
     Adresat pobierzDaneAdresata(std::string daneAdresataOddzielonePionowymiKreskami);
@@ -25,13 +24,13 @@ class PlikZAdresatami : public PlikTekstowy{
     int pobierzZPlikuIdOstatniegoAdresata();
 
 public:
-    PlikZAdresatami(std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami)
-    : PlikTekstowy(nazwaPlikuZAdresatami), NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI(nazwaTymczasowegoPlikuZAdresatami){
+    PlikZAdresatami(std::string nazwaPlikuZAdresatami)
+    : PlikTekstowy(nazwaPlikuZAdresatami){
         idOstatniegoAdresata = 0;
     };
     std::vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanego);
     bool dopiszAdresataDoPliku(Adresat adresat);
-    int usunWybranegoAdresataZPlikuTekstowego (int idAdresata);
+    void usunWybranegoAdresataZPlikuTekstowego (int idAdresata);
     void edytujWybranegoAdresataZPlikuTekstowego (Adresat adresat, int idAdresata);
     int pobierzIdOstatniegoAdresata();
 };

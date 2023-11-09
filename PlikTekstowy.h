@@ -8,7 +8,7 @@ class PlikTekstowy{
 
 const std::string NAZWA_PLIKU;
 
-public:
+protected:
     PlikTekstowy(std::string nazwaPliku) : NAZWA_PLIKU(nazwaPliku){};
     bool czyPlikJestPusty();
     std::string pobierzNazwePliku();
