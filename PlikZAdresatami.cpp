@@ -12,7 +12,7 @@ std::vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZP
     std::fstream plikTekstowy;
     plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
 
-    if (plikTekstowy.good() == true)
+    if (plikTekstowy.good())
     {
         while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami))
         {
@@ -66,27 +66,13 @@ Adresat PlikZAdresatami::pobierzDaneAdresata(std::string daneAdresataOddzieloneP
         {
             switch(numerPojedynczejDanejAdresata)
             {
-            case 1:
-                adresat.ustawId(atoi(pojedynczaDanaAdresata.c_str()));
-                break;
-            case 2:
-                adresat.ustawIdUzytkownika(atoi(pojedynczaDanaAdresata.c_str()));
-                break;
-            case 3:
-                adresat.ustawImie(pojedynczaDanaAdresata);
-                break;
-            case 4:
-                adresat.ustawNazwisko(pojedynczaDanaAdresata);
-                break;
-            case 5:
-                adresat.ustawNumerTelefonu(pojedynczaDanaAdresata);
-                break;
-            case 6:
-                adresat.ustawEmail(pojedynczaDanaAdresata);
-                break;
-            case 7:
-                adresat.ustawAdres(pojedynczaDanaAdresata);
-                break;
+            case 1: adresat.ustawId(atoi(pojedynczaDanaAdresata.c_str())); break;
+            case 2: adresat.ustawIdUzytkownika(atoi(pojedynczaDanaAdresata.c_str())); break;
+            case 3: adresat.ustawImie(pojedynczaDanaAdresata); break;
+            case 4: adresat.ustawNazwisko(pojedynczaDanaAdresata); break;
+            case 5: adresat.ustawNumerTelefonu(pojedynczaDanaAdresata); break;
+            case 6: adresat.ustawEmail(pojedynczaDanaAdresata); break;
+            case 7: adresat.ustawAdres(pojedynczaDanaAdresata); break;
             }
             pojedynczaDanaAdresata = "";
             numerPojedynczejDanejAdresata++;
@@ -100,11 +86,11 @@ bool PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat){
     std::fstream plikTekstowy;
     plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::out | std::ios::app);
 
-    if (plikTekstowy.good() == true)
+    if (plikTekstowy.good())
     {
         liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
 
-        if (PlikTekstowy::czyPlikJestPusty() == true)
+        if (PlikTekstowy::czyPlikJestPusty())
         {
             plikTekstowy << liniaZDanymiAdresata;
         }
@@ -138,17 +124,17 @@ std::string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowy
     return liniaZDanymiAdresata;
 }
 
-int PlikZAdresatami::usunWybranegoAdresataZPlikuTekstowego (int idAdresata){
+void PlikZAdresatami::usunWybranegoAdresataZPlikuTekstowego (int idAdresata){
     bool czyIstniejeAdresat = false;
     int numerWczytanejLiniiZPliku = 1;
-    int numerUsuwanejLinii = 1;
+    int numerUsuwanejLinii = 0;
     std::string wczytanaLinia = "";
     std::fstream plikTekstowy;
     std::fstream tymczasowyPlikTekstowy;
     plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
-    tymczasowyPlikTekstowy.open(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI.c_str(), std::ios::out | std::ios::app);
+    tymczasowyPlikTekstowy.open("Adresaci_temp.txt", std::ios::out | std::ios::app);
 
-    if (plikTekstowy.good() == true && idAdresata != 0)
+    if (plikTekstowy.good() && idAdresata != 0)
     {
         while(getline(plikTekstowy, wczytanaLinia))
         {
@@ -169,19 +155,18 @@ int PlikZAdresatami::usunWybranegoAdresataZPlikuTekstowego (int idAdresata){
             numerWczytanejLiniiZPliku++;
 
         }
-        if (czyIstniejeAdresat == false)
+        if (!czyIstniejeAdresat)
         {
             plikTekstowy.close();
-            return 0;
+            return;
         }
 
         plikTekstowy.close();
         tymczasowyPlikTekstowy.close();
 
         usunPlik(PlikTekstowy::pobierzNazwePliku());
-        zmienNazwePliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, PlikTekstowy::pobierzNazwePliku());
+        zmienNazwePliku("Adresaci_temp.txt", PlikTekstowy::pobierzNazwePliku());
     }
-    return idOstatniegoAdresata;
 }
 
 void PlikZAdresatami::usunPlik(std::string nazwaPlikuZRozszerzeniem)
@@ -214,7 +199,7 @@ int PlikZAdresatami::pobierzZPlikuIdOstatniegoAdresata()
     std::fstream plikTekstowy;
     plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
 
-    if (plikTekstowy.good() == true)
+    if (plikTekstowy.good())
     {
         while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)) {}
             daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
@@ -238,9 +223,9 @@ void PlikZAdresatami::edytujWybranegoAdresataZPlikuTekstowego(Adresat adresat, i
     std::fstream plikTekstowy;
     std::fstream tymczasowyPlikTekstowy;
     plikTekstowy.open(PlikTekstowy::pobierzNazwePliku().c_str(), std::ios::in);
-    tymczasowyPlikTekstowy.open(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI.c_str(), std::ios::out | std::ios::app);
+    tymczasowyPlikTekstowy.open("Adresaci_temp.txt", std::ios::out | std::ios::app);
 
-    if (plikTekstowy.good() == true && idAdresata != 0)
+    if (plikTekstowy.good() && idAdresata != 0)
     {
         while (getline(plikTekstowy, wczytanaLinia))
         {
@@ -263,7 +248,7 @@ void PlikZAdresatami::edytujWybranegoAdresataZPlikuTekstowego(Adresat adresat, i
             }
             numerWczytanejLiniiZPliku++;
         }
-        if (czyIstniejeAdresat == false){
+        if (!czyIstniejeAdresat){
             plikTekstowy.close();
             std::cout << std::endl << "Adresat nie istnieje." << std::endl << std::endl;
             system("pause");
@@ -273,7 +258,7 @@ void PlikZAdresatami::edytujWybranegoAdresataZPlikuTekstowego(Adresat adresat, i
         tymczasowyPlikTekstowy.close();
 
         usunPlik(PlikTekstowy::pobierzNazwePliku());
-        zmienNazwePliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, PlikTekstowy::pobierzNazwePliku());
+        zmienNazwePliku("Adresaci_temp.txt", PlikTekstowy::pobierzNazwePliku());
     }
 
     std::cout << std::endl << "Dane zostaly zaktualizowane." << std::endl << std::endl;

@@ -25,8 +25,8 @@ class AdresatMenadzer {
     void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
 
 public:
-    AdresatMenadzer(std::string nazwaPlikuZAdresatami, std::string nazwaTymczasowegoPlikuZAdresatami, int idZalogowanegoUzytkownika)
-     : ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika), plikZAdresatami(nazwaPlikuZAdresatami, nazwaTymczasowegoPlikuZAdresatami) {
+    AdresatMenadzer(std::string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
+     : ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika), plikZAdresatami(nazwaPlikuZAdresatami) {
         adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
     };
     void dodajAdresata();

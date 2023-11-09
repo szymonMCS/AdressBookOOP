@@ -12,7 +12,6 @@
 
 class PlikZUzytkownikami : public PlikTekstowy{
 
-    bool czyPlikJestPusty();
     std::string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
     Uzytkownik pobierzDaneUzytkownika(std::string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
 
